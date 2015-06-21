@@ -42,3 +42,6 @@ Link to Apps: https://deb14.shinyapps.io/DataProduct
 Link to Github: https://github.com/deb14/Dataproduct
 
 Link to slidify: http://rpubs.com/deb/dataproduct2
+
+To run install shiny, devtools and use the below code
+runGitHub( "DataProduct", "deb14")
