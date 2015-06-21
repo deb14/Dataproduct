@@ -1,0 +1,22 @@
+---
+title: "DatProduct"
+output: html_document
+---
+
+Content:
+
+1.Synopsis
+2.Sample Code
+3.How to reproduce the app
+
+
+
+#Synopsis
+This exercise belongs to Data product courses which is part of Data Science specialization from Johns Hopkins University. The data is picked from built in R dataset. Where we are trying to use some interactivity using different controls, like slider, dropdown, submit button & charts.
+
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

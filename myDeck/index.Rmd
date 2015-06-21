@@ -1,0 +1,73 @@
+---
+title       : Coursera DatProduct
+subtitle    : Project
+author      : deb14
+job         : Learner
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Read-And-Delete
+
+1. Edit YAML front matter
+2. Write using R Markdown
+3. Use an empty line followed by three dashes to separate slides!
+
+--- .class #id 
+
+## Slide 2 
+
+This exercise belongs to Data product courses which is part of Data Science specialization from Johns Hopkins University. The data is picked from built in R dataset. Where we are trying to use some interactivity using different controls, like slider, dropdown, submit button & charts.
+## Slide 3
+ui.R view:
+hinyUI(pageWithSidebar(
+  headerPanel('Iris k-means clustering'),
+  sidebarPanel(
+    selectInput('xcol', 'X Variable', names(iris)),
+    selectInput('ycol', 'Y Variable', names(iris),
+                selected=names(iris)[[2]]),
+    sliderInput('clusters', 'Cluster count', 3,
+                 min = 1, max = 9),
+    submitButton("Go!")
+  ),
+  mainPanel(
+    plotOutput('plot1')
+  )
+))
+
+## Slide 4
+shinyServer(function(input, output, session) {
+  
+
+  selectedData <- reactive({
+    
+    iris[, c(input$xcol, input$ycol)]
+  })
+  
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+ 
+  output$plot1 <- renderPlot({
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
+  
+})
+
+## Slide 5
+Link to Shinny Apps:
+https://deb14.shinyapps.io/DataProduct
+
+Link to Github:
+
+
+
+
