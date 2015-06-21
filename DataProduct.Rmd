@@ -14,9 +14,31 @@ Content:
 #Synopsis
 This exercise belongs to Data product courses which is part of Data Science specialization from Johns Hopkins University. The data is picked from built in R dataset. Where we are trying to use some interactivity using different controls, like slider, dropdown, submit button & charts.
 
+# Sample COde
+shinyServer(function(input, output, session) {
+  
+  
+  selectedData <- reactive({
+    
+    iris[, c(input$xcol, input$ycol)]
+  })
+  
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+ 
+  output$plot1 <- renderPlot({
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
 
-```{r, echo=FALSE}
-plot(cars)
-```
+# How to reproduce
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Link to Apps: https://deb14.shinyapps.io/DataProduct
+
+Link to Github: https://github.com/deb14/Dataproduct
+
+Link to slidify: http://rpubs.com/deb/dataproduct2

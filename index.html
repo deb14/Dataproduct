@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coursera DatProduct</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Coursera DatProduct">
+  <meta name="author" content="deb14">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Coursera DatProduct</h1>
+    <h2>Project</h2>
+    <p>deb14<br/>Learner</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The project contains mainly 2 sections</p>
+
+<ol>
+<li> Using Shiny create an interactive application and publish it to shinny apps</li>
+<li> Create slides using slidify </li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Background</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This exercise belongs to Data product courses which is part of Data Science specialization from Johns Hopkins University. The data is picked from built in R dataset. Where we are trying to use some interactivity using different controls, like slider, dropdown, submit button &amp; charts.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>UI Code Review</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>hinyUI(pageWithSidebar(
+  headerPanel(&#39;Iris k-means clustering&#39;),
+  sidebarPanel(
+    selectInput(&#39;xcol&#39;, &#39;X Variable&#39;, names(iris)),
+    selectInput(&#39;ycol&#39;, &#39;Y Variable&#39;, names(iris),
+                selected=names(iris)[[2]]),
+    sliderInput(&#39;clusters&#39;, &#39;Cluster count&#39;, 3,
+                 min = 1, max = 9),
+    submitButton(&quot;Go!&quot;)
+  ),
+  mainPanel(
+    plotOutput(&#39;plot1&#39;)
+  )
+))</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Server COde Review</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>shinyServer(function(input, output, session) {</p>
+
+<p>selectedData &lt;- reactive({</p>
+
+<pre><code>iris[, c(input$xcol, input$ycol)]
+</code></pre>
+
+<p>})</p>
+
+<p>clusters &lt;- reactive({
+    kmeans(selectedData(), input$clusters)
+  })</p>
+
+<p>output$plot1 &lt;- renderPlot({
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })</p>
+
+<p>})</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Links</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Link to Shinny Apps:
+<a href="https://deb14.shinyapps.io/DataProduct">https://deb14.shinyapps.io/DataProduct</a></p>
+
+<p>Link to Github:
+<a href="https://github.com/deb14/Dataproduct/">https://github.com/deb14/Dataproduct/</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Summary'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Background'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='UI Code Review'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Server COde Review'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Links'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
